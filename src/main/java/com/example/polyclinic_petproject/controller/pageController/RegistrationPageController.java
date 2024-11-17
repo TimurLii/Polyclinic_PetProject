@@ -12,19 +12,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/registration")
+@RequestMapping("/")
 public class RegistrationPageController {
     @Autowired
     private PatientService patientService;
 
     @GetMapping()
     public String showRegistrationPage(Model model) { // Добавьте параметр Model
+        System.out.println("1");
         model.addAttribute("patient", new Patient()); // Добавьте новый объект Patient в модель
         return "registrationFormPage"; // Возврат шаблона
     }
 
     @PostMapping()
     public String registerPatient(@ModelAttribute Patient patient) {
+        System.out.println("2");
+
         if (patient != null) {
             patientService.savePatient(patient);
             System.out.println(patient);
