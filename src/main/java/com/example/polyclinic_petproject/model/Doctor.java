@@ -14,7 +14,7 @@ public class Doctor {
 
     private String fullName;
 
-    private String Specialty;
+    private String specialty;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Schedule> appointments = new HashSet<>();
