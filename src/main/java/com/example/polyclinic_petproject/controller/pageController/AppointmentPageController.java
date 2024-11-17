@@ -1,8 +1,8 @@
 package com.example.polyclinic_petproject.controller.pageController;
 
-import com.example.polyclinic_petproject.enums.AppointmentTimeEnum;
 import com.example.polyclinic_petproject.entity.AppointmentTime;
 import com.example.polyclinic_petproject.entity.Doctor;
+import com.example.polyclinic_petproject.enums.AppointmentTimeEnum;
 import com.example.polyclinic_petproject.service.AppointmentService;
 import com.example.polyclinic_petproject.service.DoctorService;
 import org.springframework.stereotype.Controller;
@@ -21,9 +21,12 @@ public class AppointmentPageController {
     private final DoctorService doctorService;
     private final AppointmentService appointmentService;
 
+
+
     public AppointmentPageController(DoctorService doctorService, AppointmentService appointmentService) {
         this.doctorService = doctorService;
         this.appointmentService = appointmentService;
+
     }
 
     @GetMapping()

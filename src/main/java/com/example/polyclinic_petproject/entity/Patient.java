@@ -15,6 +15,7 @@ public class Patient {
         private int age;
         private String gender;
         private String contactDetails;
+        private String password;
 //        @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
 //        private Set<Schedule> appointments = new HashSet<>();
     }
