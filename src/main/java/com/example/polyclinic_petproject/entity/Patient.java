@@ -1,11 +1,14 @@
 package com.example.polyclinic_petproject.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 @Entity
 @Data
-public class Patient {
+public class Patient  {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
@@ -15,6 +18,15 @@ public class Patient {
         private int age;
         private String gender;
         private String contactDetails;
+        private String username;
+        private String password;
+        private boolean active;
+
+
+        private String role = "ROLE_PATIENT";
+
+
+
 //        @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
 //        private Set<Schedule> appointments = new HashSet<>();
     }
