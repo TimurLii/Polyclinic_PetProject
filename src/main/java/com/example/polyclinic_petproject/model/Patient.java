@@ -13,12 +13,12 @@ public class Patient {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 
-        private Long DoctorName;
+//        private Long DoctorName;
         private String fullName;
         private int age;
         private String gender;
         private String contactDetails;
-        @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-        private Set<Schedule> appointments = new HashSet<>();
+//        @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+//        private Set<Schedule> appointments = new HashSet<>();
     }
 

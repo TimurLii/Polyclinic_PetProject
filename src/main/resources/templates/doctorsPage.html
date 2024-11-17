@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>All doctors</title>
+</head>
+<body>
+<h1>All doctors</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Full name</th>
+        <th>Specialty </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="doctor : ${allDoctors}">
+        <td><span th:text="${doctor.Id}"></span></td>
+        <td><span th:text="${doctor.fullName}"></span></td>
+        <td><span th:text="${doctor.specialty}"></span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

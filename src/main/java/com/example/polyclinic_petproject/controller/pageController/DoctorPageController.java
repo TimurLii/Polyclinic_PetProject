@@ -25,14 +25,14 @@ public class DoctorPageController {
     public String getAllDoctors(Model model) {
         List<Doctor> allDoctors = doctorService.getAllDoctors();
         model.addAttribute("allDoctors", allDoctors);
-        return "doctors-page";
+        return "doctorsPage";
 
     }
 
     @GetMapping("/create")
     public String createDoctorForm(Model model) {
         model.addAttribute("doctor", new Doctor());
-        return "create-doctorPage";
+        return "createDoctor-Page";
     }
 
     @PostMapping()

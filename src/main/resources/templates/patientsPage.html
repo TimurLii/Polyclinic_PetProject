@@ -8,19 +8,24 @@
     <title>All doctors</title>
 </head>
 <body>
-<h1>All doctors</h1>
+<h1>All patients</h1>
 <table>
     <thead>
     <tr>
         <th>Id</th>
         <th>Full name</th>
-        <th>Specialty </th>
+        <th>Age </th>
+        <th>Gender </th>
+        <th>Contact details </th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="doctor : ${allDoctors}">
-        <td><span th:text="${doctor.fullName}"></span></td>
-        <td><span th:text="${doctor.specialty}"></span></td>
+    <tr th:each="patient : ${allPatients}">
+        <td><span th:text="${patient.id}"></span></td>
+        <td><span th:text="${patient.fullName}"></span></td>
+        <td><span th:text="${patient.age}"></span></td>
+        <td><span th:text="${patient.gender}"></span></td>
+        <td><span th:text="${patient.contactDetails}"></span></td>
     </tr>
     </tbody>
 </table>
