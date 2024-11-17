@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create Doctor</title>
+    <title>Create patient</title>
 </head>
 <body>
 <h1>Create New Doctor</h1>
@@ -9,14 +9,20 @@
     <label for="name">Full name:</label>
     <input type="text" id="name" th:field="*{fullName}" required/>
 
-    <label for="age">age:</label>
+    <label for="age">Age:</label>
     <input type="text" id="age" th:field="*{age}" required/>
 
-    <label for="gender">gender:</label>
+    <label for="gender">Gender:</label>
     <input type="text" id="gender" th:field="*{gender}" required/>
 
-    <label for="contactDetails">contactDetails:</label>
+    <label for="contactDetails">Contact details:</label>
     <input type="text" id="contactDetails" th:field="*{contactDetails}" required/>
+
+    <label for="userName">User name:</label>
+    <input type="text" id="userName" th:field="*{userName}" required/>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" th:field="*{password}" required/>
 
     <button type="submit">Create Patient</button>
 </form>
