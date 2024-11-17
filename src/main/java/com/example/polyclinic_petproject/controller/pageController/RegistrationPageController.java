@@ -4,6 +4,7 @@ package com.example.polyclinic_petproject.controller.pageController;
 import com.example.polyclinic_petproject.entity.Patient;
 import com.example.polyclinic_petproject.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class RegistrationPageController {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private PatientService patientService;
 
@@ -29,6 +32,7 @@ public class RegistrationPageController {
         System.out.println("2");
 
         if (patient != null) {
+            patient.setPassword(passwordEncoder.encode(patient.getPassword())); // Шифрование пароля
             patientService.savePatient(patient);
             System.out.println(patient);
             return "redirect:/loginPage";
