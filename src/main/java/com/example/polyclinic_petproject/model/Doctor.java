@@ -3,8 +3,7 @@ package com.example.polyclinic_petproject.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.HashSet;
-import java.util.Set;
+
 @Entity
 @Data
 public class Doctor {
@@ -16,6 +15,6 @@ public class Doctor {
 
     private String specialty;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Schedule> appointments = new HashSet<>();
+//    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Schedule> appointments = new HashSet<>();
 }

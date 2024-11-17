@@ -2,8 +2,10 @@ package com.example.polyclinic_petproject.model;
 
 import com.example.polyclinic_petproject.enums.AppointmentTimeEnum;
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class AppointmentTime {
 
     @Id
@@ -15,4 +17,8 @@ public class AppointmentTime {
 
     @ManyToOne
     private Patient patient;
+    @ManyToOne
+    private Doctor doctor;
+
+
 }
