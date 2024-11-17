@@ -1,4 +1,4 @@
-package com.example.polyclinic_petproject.model;
+package com.example.polyclinic_petproject.entity;
 
 import com.example.polyclinic_petproject.enums.AppointmentTimeEnum;
 import jakarta.persistence.*;

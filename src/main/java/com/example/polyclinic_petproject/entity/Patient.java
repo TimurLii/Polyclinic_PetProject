@@ -1,10 +1,7 @@
-package com.example.polyclinic_petproject.model;
+package com.example.polyclinic_petproject.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Data

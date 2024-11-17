@@ -1,7 +1,6 @@
 package com.example.polyclinic_petproject.controller.pageController;
 
-import com.example.polyclinic_petproject.model.Doctor;
-import com.example.polyclinic_petproject.model.Patient;
+import com.example.polyclinic_petproject.entity.Patient;
 import com.example.polyclinic_petproject.service.PatientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

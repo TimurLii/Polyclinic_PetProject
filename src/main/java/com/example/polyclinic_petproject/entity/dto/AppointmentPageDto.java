@@ -1,8 +1,8 @@
-package com.example.polyclinic_petproject.model.dto;
+package com.example.polyclinic_petproject.entity.dto;
 
 import com.example.polyclinic_petproject.enums.AppointmentTimeEnum;
-import com.example.polyclinic_petproject.model.Doctor;
-import com.example.polyclinic_petproject.model.Patient;
+import com.example.polyclinic_petproject.entity.Doctor;
+import com.example.polyclinic_petproject.entity.Patient;
 import lombok.Data;
 
 @Data

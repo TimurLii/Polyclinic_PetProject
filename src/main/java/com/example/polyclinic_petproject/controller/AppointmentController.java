@@ -1,6 +1,6 @@
 package com.example.polyclinic_petproject.controller;
 
-import com.example.polyclinic_petproject.model.AppointmentTime;
+import com.example.polyclinic_petproject.entity.AppointmentTime;
 import com.example.polyclinic_petproject.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

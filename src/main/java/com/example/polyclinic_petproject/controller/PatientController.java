@@ -1,6 +1,6 @@
 package com.example.polyclinic_petproject.controller;
 
-import com.example.polyclinic_petproject.model.Patient;
+import com.example.polyclinic_petproject.entity.Patient;
 import com.example.polyclinic_petproject.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

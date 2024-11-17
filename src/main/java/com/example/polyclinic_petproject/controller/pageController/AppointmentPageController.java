@@ -1,8 +1,8 @@
 package com.example.polyclinic_petproject.controller.pageController;
 
 import com.example.polyclinic_petproject.enums.AppointmentTimeEnum;
-import com.example.polyclinic_petproject.model.AppointmentTime;
-import com.example.polyclinic_petproject.model.Doctor;
+import com.example.polyclinic_petproject.entity.AppointmentTime;
+import com.example.polyclinic_petproject.entity.Doctor;
 import com.example.polyclinic_petproject.service.AppointmentService;
 import com.example.polyclinic_petproject.service.DoctorService;
 import org.springframework.stereotype.Controller;

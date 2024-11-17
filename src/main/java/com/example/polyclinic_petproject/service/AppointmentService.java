@@ -1,6 +1,6 @@
 package com.example.polyclinic_petproject.service;
 
-import com.example.polyclinic_petproject.model.AppointmentTime;
+import com.example.polyclinic_petproject.entity.AppointmentTime;
 import com.example.polyclinic_petproject.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
