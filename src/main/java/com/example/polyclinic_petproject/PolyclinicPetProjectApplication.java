@@ -4,9 +4,10 @@ import com.example.polyclinic_petproject.entity.Doctor;
 import com.example.polyclinic_petproject.repository.DoctorRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class PolyclinicPetProjectApplication {
 
     public static void main(String[] args) {

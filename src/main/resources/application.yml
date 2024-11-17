@@ -10,8 +10,11 @@ spring:
     console:
       enabled: true
   jpa:
-    show-sql: true
+    show-sql: false
     generate-ddl: false
     hibernate:
       ddl-auto: update
-
+#  security:
+#    user:
+#      name: user
+#      password: user
