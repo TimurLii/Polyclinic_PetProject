@@ -16,6 +16,8 @@ public class WebSecurityConfig {
     @Autowired
     PatientService patientService;
 
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http

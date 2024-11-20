@@ -11,49 +11,48 @@ import java.util.Collection;
 @Data
 @Table(name = "patients")
 public class Patient implements UserDetails {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-//        private Long DoctorName;
-        private String fullName;
-        private int age;
-        private String gender;
-        private String contactDetails;
-        private String login;
-        private String password;
+    //        private Long DoctorName;
+    private String fullName;
+    private int age;
+    private String gender;
+    private String contactDetails;
+    private String login;
+    private String password;
 
-        @Override
-        public Collection<? extends GrantedAuthority> getAuthorities() {
-                return null; // Вы можете добавить роли, если нужно
-        }
 
-        @Override
-        public String getUsername() {
-                return login;
-        }
-
-        @Override
-        public boolean isAccountNonExpired() {
-                return true;
-        }
-
-        @Override
-        public boolean isAccountNonLocked() {
-                return true;
-        }
-
-        @Override
-        public boolean isCredentialsNonExpired() {
-                return true;
-        }
-
-        @Override
-        public boolean isEnabled() {
-                return true;
-        }
-
-//        @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-//        private Set<Schedule> appointments = new HashSet<>();
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null; // Вы можете добавить роли, если нужно
     }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+}
 
