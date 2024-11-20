@@ -50,27 +50,6 @@ public class AppointmentPageController {
         return "createAppointmentPage";
     }
 
-    //    @PostMapping()
-//    public String createAppointment(@ModelAttribute AppointmentTime appointmentTime,
-//                                    @RequestParam("selectedDoctorId") Long selectedDoctorId,
-//                                    @RequestParam("selectedTimeEnum") String selectedTimeEnum,
-//                                    @AuthenticationPrincipal UserDetails userDetails) {
-//
-//        Patient patient = patientService.findByFullName(userDetails.getUsername());
-//        if (patient.isEnabled()) {
-//            System.out.println(patient.isEnabled());
-//            appointmentTime.setPatient(patient);
-//        }
-//        Doctor doctor = doctorService.findById(selectedDoctorId)
-//                .orElseThrow(() -> new RuntimeException("Doctor not found"));
-//        appointmentTime.setDoctor(doctor);
-//
-//        appointmentTime.setTimeEnum(AppointmentTimeEnum.valueOf(selectedTimeEnum));
-//
-//
-//        appointmentService.saveAppointment(appointmentTime);
-//        return "redirect:/appointment";
-//    }
     @PostMapping()
     public String createAppointment(@ModelAttribute AppointmentTime appointmentTime,
                                     @RequestParam("selectedDoctorId") Long selectedDoctorId,
@@ -79,7 +58,6 @@ public class AppointmentPageController {
 
         Patient patient = patientService.findByFullName(userDetails.getUsername());
         if (patient.isEnabled()) {
-            System.out.println(patient.isEnabled());
             appointmentTime.setPatient(patient);
         }
 
