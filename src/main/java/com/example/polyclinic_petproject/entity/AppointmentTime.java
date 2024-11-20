@@ -4,6 +4,8 @@ import com.example.polyclinic_petproject.enums.AppointmentTimeEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 public class AppointmentTime {
@@ -18,6 +20,7 @@ public class AppointmentTime {
     private Patient patient;
     @ManyToOne
     private Doctor doctor;
-
+    @OneToMany(mappedBy = "appointmentTime")
+    private List<Booking> bookings;
 
 }

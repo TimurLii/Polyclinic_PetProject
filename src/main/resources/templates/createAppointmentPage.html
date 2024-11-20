@@ -28,8 +28,8 @@
         <label for="timeSelect">Choose a time:</label>
         <select id="timeSelect" name="selectedTimeEnum">
             <option value="">Select a time</option>
-            <tr th:each="time : ${appointmentTimeEnum}">
-                <option th:text="${time.displayName}" th:value="${time.displayName}"></option>
+            <tr th:each="time : ${availableTimes}">
+                <option th:value="${time.timeEnum}" th:text="${time.timeEnum}"></option>
             </tr>
         </select>
 
