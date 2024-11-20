@@ -52,14 +52,6 @@ public class Patient implements UserDetails {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "fullName='" + fullName + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                ", contactDetails='" + contactDetails + '\'' +
-                '}';
-    }
+
 }
 

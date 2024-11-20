@@ -1,6 +1,5 @@
 package com.example.polyclinic_petproject.entity;
 
-import com.example.polyclinic_petproject.enums.AppointmentTimeEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,12 +11,12 @@ public class AppointmentTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private AppointmentTimeEnum timeEnum;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Patient patient;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Doctor doctor;
 
-
+//    @OneToMany(mappedBy = "appointmentTime")
+//    private List<Booking> bookings;
 }

@@ -17,7 +17,7 @@ public class AppointmentService {
         return appointmentRepository.save(appointmentTime);
     }
 
-    public List<AppointmentTime> getAppointments() {
+    public List<AppointmentTime> getAllAppointments() {
         return appointmentRepository.findAll();
     }
 
@@ -26,10 +26,7 @@ public class AppointmentService {
     }
 
 
-//    public boolean isTimeAvailable(LocalDateTime time) {
-//        List<AppointmentTime> appointments = appointmentRepository.findAll();
-//        return appointments.stream().noneMatch(a -> a.getAppointmentTime().isEqual(time));
-//    }
 
-    // Другие методы, например, для проверки доступных временных слотов
+
+
 }

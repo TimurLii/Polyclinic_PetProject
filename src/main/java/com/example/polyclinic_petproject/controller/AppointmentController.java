@@ -20,8 +20,8 @@ public class AppointmentController {
     }
 
     @GetMapping
-    public List<AppointmentTime> getAppointments() {
-        return appointmentService.getAppointments();
+    public List<AppointmentTime> getAllAppointments() {
+        return appointmentService.getAllAppointments();
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

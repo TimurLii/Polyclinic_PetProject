@@ -1,3 +1,38 @@
+<!--<!doctype html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport"-->
+<!--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--    <title>All appointment</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>All appointments</h1>-->
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Id</th>-->
+<!--        <th>Time</th>-->
+<!--        <th>Patient</th>-->
+<!--        <th>Doctor</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="appointments : ${appointments}">-->
+
+<!--        <td><span th:text="${appointments.id}"></span></td>-->
+
+<!--        <td><span th:text="${appointments.timeEnum}"></span></td>-->
+
+<!--        <td><span th:text="${appointments.patient}"></span></td>-->
+<!--        <td><span th:text="${appointments.doctor}"></span></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->
+
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -5,7 +40,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>All appointment</title>
+    <title>All appointments</title>
 </head>
 <body>
 <h1>All appointments</h1>
@@ -19,11 +54,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="appointments : ${appointments}">
-        <td><span th:text="${appointments.id}"></span></td>
-        <td><span th:text="${appointments.timeEnum}"></span></td>
-        <td><span th:text="${appointments.patient}"></span></td>
-        <td><span th:text="${appointments.doctor}"></span></td>
+    <tr th:each="appointment : ${appointments}">
+        <td><span th:text="${appointment.id}"></span></td>
+        <td><span th:text="${appointment.id}"></span></td>
+        <td><span th:text="${appointment.patient.fullName}"></span></td>
+        <td><span th:text="${appointment.doctor.fullName}"></span></td>
     </tr>
     </tbody>
 </table>
