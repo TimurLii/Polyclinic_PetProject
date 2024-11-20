@@ -38,7 +38,10 @@ public class AppointmentPageController {
     public String getAllAppointments(Model model) {
         List<AppointmentTime> appointments = appointmentService.getAllAppointments();
         model.addAttribute("appointments", appointments);
+
         List<Booking> allBookings = bookingService.getAllBookings();
+
+
         model.addAttribute("bookings", allBookings);
 
         return "appointmentsPage";
@@ -57,6 +60,10 @@ public class AppointmentPageController {
         model.addAttribute("allDoctors", allDoctors);
 
         return "createAppointmentPage";
+    }
+    @GetMapping("/createAgain")
+    public String createAppointmentAgain(){
+        return "createAppointmentPageAgain";
     }
 
     @PostMapping()
@@ -78,7 +85,6 @@ public class AppointmentPageController {
                 .orElseThrow(() -> new RuntimeException("Doctor not found"));
         appointmentTime.setDoctor(doctor);
 
-        System.out.println("Appointment before saving: " + appointmentTime);
         appointmentService.saveAppointment(appointmentTime);
 
         Booking booking = new Booking();
@@ -87,9 +93,17 @@ public class AppointmentPageController {
         booking.setAppointmentTime(appointmentTime);
 
         bookingService.saveBooking(booking);
-        System.out.println("Booking after saving: " + booking);
 
+        if(isFreeAppointmentTime(booking)){
+            return "redirect:/appointment/createAgain";
+        }
         return "redirect:/appointment";
     }
 
+    private boolean isFreeAppointmentTime(Booking booking) {
+        if (!bookingService.existsByDateAndTime(booking.getLocalDate(), booking.getTimeEnum())) {
+            return false;
+        }
+        return true;
+    }
 }

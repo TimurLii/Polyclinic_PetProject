@@ -24,4 +24,24 @@ public class Booking {
     @JoinColumn(name = "appointment_time_id")
     @JsonBackReference
     private AppointmentTime appointmentTime;
+
+    @Enumerated(EnumType.STRING)
+    private BookingStatus status;
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id= " + id +
+                "localeDateTime=" + localDate +
+                "appointmentTimeEnum= " + timeEnum.getDisplayName() +
+                ", appointmentTimeId= " + (appointmentTime != null ? appointmentTime.getId() : "null ") +
+                "bookingStatus= " + status +
+                '}';
+    }
+
+    public enum BookingStatus {
+        BUSY,
+        FREE,
+        CANCELED;
+    }
 }

@@ -22,4 +22,13 @@ public class AppointmentTime {
 
     @OneToMany(mappedBy = "appointmentTime")
     private List<Booking> bookings;
+
+    @Override
+    public String toString() {
+        return "AppointmentTime{" +
+                "id=" + id +
+                "patient= " +patient.getFullName()+
+                "doctor=" + doctor.getFullName()+
+                '}';
+    }
 }

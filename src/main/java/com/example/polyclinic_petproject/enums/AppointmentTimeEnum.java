@@ -1,5 +1,7 @@
 package com.example.polyclinic_petproject.enums;
 
+import java.util.Random;
+
 public enum AppointmentTimeEnum {
     time_1("09:00"),
     time_2("10:00"),
@@ -16,6 +18,12 @@ public enum AppointmentTimeEnum {
     AppointmentTimeEnum(String displayName) {
         this.displayName = displayName;
     }
+
+    public static AppointmentTimeEnum returnRandomTime() {
+        int pic = new Random().nextInt(AppointmentTimeEnum.values().length);
+        return AppointmentTimeEnum.values()[pic];
+    }
+
 
     public String getDisplayName() {
         return displayName;
