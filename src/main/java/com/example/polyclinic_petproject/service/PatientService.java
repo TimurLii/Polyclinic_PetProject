@@ -28,4 +28,10 @@ public class PatientService {
     public void deleteById(Long id) {
         patientRepository.deleteById(id);
     }
+
+    public Patient findByFullName(String fullName) {
+        return patientRepository.findByFullName(fullName);
+    }
+
+
 }

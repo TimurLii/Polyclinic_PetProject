@@ -25,7 +25,7 @@ public class DoctorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> get(@PathVariable Long id) {
+    public ResponseEntity<Doctor> get(@PathVariable Long id) {
         return doctorService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());

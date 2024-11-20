@@ -21,8 +21,8 @@ public class DoctorService {
         return doctorRepository.save(doctor);
     }
 
-    public Optional<Object> findById(Long id) {
-        return Optional.of(doctorRepository.findById(id));
+    public Optional<Doctor> findById(Long id) {
+        return doctorRepository.findById(id);
     }
 
     public void deleteById(Long id) {

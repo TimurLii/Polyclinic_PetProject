@@ -20,4 +20,12 @@ public enum AppointmentTimeEnum {
     public String getDisplayName() {
         return displayName;
     }
+    public static AppointmentTimeEnum fromDisplayName(String displayName) {
+        for (AppointmentTimeEnum timeEnum : AppointmentTimeEnum.values()) {
+            if (timeEnum.getDisplayName().equals(displayName)) {
+                return timeEnum;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant for display name: " + displayName);
+    }
 }

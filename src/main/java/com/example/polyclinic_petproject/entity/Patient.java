@@ -14,8 +14,6 @@ public class Patient implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    //        private Long DoctorName;
     private String fullName;
     private int age;
     private String gender;
@@ -26,7 +24,7 @@ public class Patient implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null; // Вы можете добавить роли, если нужно
+        return null;
     }
 
     @Override
@@ -54,5 +52,14 @@ public class Patient implements UserDetails {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "fullName='" + fullName + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", contactDetails='" + contactDetails + '\'' +
+                '}';
+    }
 }
 

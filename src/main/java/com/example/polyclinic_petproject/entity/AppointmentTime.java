@@ -14,7 +14,6 @@ public class AppointmentTime {
 
     @Enumerated(EnumType.STRING)
     private AppointmentTimeEnum timeEnum;
-
     @ManyToOne
     private Patient patient;
     @ManyToOne

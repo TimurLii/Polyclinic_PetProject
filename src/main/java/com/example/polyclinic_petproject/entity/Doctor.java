@@ -15,6 +15,11 @@ public class Doctor {
 
     private String specialty;
 
-//    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<Schedule> appointments = new HashSet<>();
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "fullName='" + fullName + '\'' +
+                ", specialty='" + specialty + '\'' +
+                '}';
+    }
 }
