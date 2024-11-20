@@ -1,6 +1,7 @@
 package com.example.polyclinic_petproject.entity;
 
 import com.example.polyclinic_petproject.enums.AppointmentTimeEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,7 +20,8 @@ public class Booking {
     @Enumerated(EnumType.STRING)
     private AppointmentTimeEnum timeEnum;
 
-//    @ManyToOne
-//    @JoinColumn(name = "appointment_time_id")
-//    private AppointmentTime appointmentTime;
+    @ManyToOne
+    @JoinColumn(name = "appointment_time_id")
+    @JsonBackReference
+    private AppointmentTime appointmentTime;
 }

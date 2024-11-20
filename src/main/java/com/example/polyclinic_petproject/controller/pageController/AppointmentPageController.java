@@ -38,6 +38,9 @@ public class AppointmentPageController {
     public String getAllAppointments(Model model) {
         List<AppointmentTime> appointments = appointmentService.getAllAppointments();
         model.addAttribute("appointments", appointments);
+        List<Booking> allBookings = bookingService.getAllBookings();
+        model.addAttribute("bookings", allBookings);
+
         return "appointmentsPage";
     }
 
@@ -65,10 +68,6 @@ public class AppointmentPageController {
 
         LocalDate currentDate = dataSelected;
         String currentTime = selectedTimeEnum;
-        Booking booking = new Booking();
-        booking.setLocalDate(dataSelected);
-        booking.setTimeEnum(AppointmentTimeEnum.fromDisplayName(currentTime));
-        bookingService.saveBooking(booking);
 
         Patient patient = patientService.findByFullName(userDetails.getUsername());
         if (patient.isEnabled()) {
@@ -79,14 +78,18 @@ public class AppointmentPageController {
                 .orElseThrow(() -> new RuntimeException("Doctor not found"));
         appointmentTime.setDoctor(doctor);
 
-
-
         System.out.println("Appointment before saving: " + appointmentTime);
         appointmentService.saveAppointment(appointmentTime);
-        System.out.println("Appointment after saving: " + appointmentTime);
+
+        Booking booking = new Booking();
+        booking.setLocalDate(currentDate);
+        booking.setTimeEnum(AppointmentTimeEnum.fromDisplayName(currentTime));
+        booking.setAppointmentTime(appointmentTime);
+
+        bookingService.saveBooking(booking);
+        System.out.println("Booking after saving: " + booking);
 
         return "redirect:/appointment";
     }
-
 
 }

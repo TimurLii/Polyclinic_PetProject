@@ -20,8 +20,8 @@ public class BookingController {
     }
 
     @GetMapping
-    public List<Booking> getBookings() {
-        return bookingService.getBookings();
+    public List<Booking> getAllBookings() {
+        return bookingService.getAllBookings();
     }
 
     @DeleteMapping("/delete/{id}")

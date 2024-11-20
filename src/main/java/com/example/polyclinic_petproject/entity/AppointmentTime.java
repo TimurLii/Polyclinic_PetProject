@@ -3,6 +3,8 @@ package com.example.polyclinic_petproject.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 public class AppointmentTime {
@@ -15,8 +17,9 @@ public class AppointmentTime {
     private Patient patient;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-//    @OneToMany(mappedBy = "appointmentTime")
-//    private List<Booking> bookings;
+    @OneToMany(mappedBy = "appointmentTime")
+    private List<Booking> bookings;
 }

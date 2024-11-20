@@ -48,6 +48,7 @@
     <thead>
     <tr>
         <th>Id</th>
+        <th>Date</th>
         <th>Time</th>
         <th>Patient</th>
         <th>Doctor</th>
@@ -56,7 +57,12 @@
     <tbody>
     <tr th:each="appointment : ${appointments}">
         <td><span th:text="${appointment.id}"></span></td>
-        <td><span th:text="${appointment.id}"></span></td>
+        <td>
+            <span th:each="booking : ${appointment.bookings}" th:text="${booking.localDate}"></span>
+        </td>
+        <td>
+            <span th:each="booking : ${appointment.bookings}" th:text="${booking.timeEnum.getDisplayName()}"></span>
+        </td>
         <td><span th:text="${appointment.patient.fullName}"></span></td>
         <td><span th:text="${appointment.doctor.fullName}"></span></td>
     </tr>

@@ -16,9 +16,10 @@ public class BookingService {
         return bookingRepository.save(booking);
     }
 
-    public List<Booking> getBookings() {
+    public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
     }
+
 
     public void deleteById(Long id) {
         bookingRepository.deleteById(id);
