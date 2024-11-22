@@ -55,14 +55,22 @@ public class AppointmentPageController {
 
         model.addAttribute("appointmentTimeEnum", AppointmentTimeEnum.values());
 
-
         List<Doctor> allDoctors = doctorService.getAllDoctors();
         model.addAttribute("allDoctors", allDoctors);
 
         return "createAppointmentPage";
     }
+
     @GetMapping("/createAgain")
-    public String createAppointmentAgain(){
+    public String createAppointmentAgain(Model model) {
+
+        model.addAttribute("appointmentTime", new AppointmentTime());
+
+        model.addAttribute("appointmentTimeEnum", AppointmentTimeEnum.values());
+
+        List<Doctor> allDoctors = doctorService.getAllDoctors();
+        model.addAttribute("allDoctors", allDoctors);
+
         return "createAppointmentPageAgain";
     }
 
@@ -85,6 +93,7 @@ public class AppointmentPageController {
                 .orElseThrow(() -> new RuntimeException("Doctor not found"));
         appointmentTime.setDoctor(doctor);
 
+
         appointmentService.saveAppointment(appointmentTime);
 
         Booking booking = new Booking();
@@ -92,12 +101,16 @@ public class AppointmentPageController {
         booking.setTimeEnum(AppointmentTimeEnum.fromDisplayName(currentTime));
         booking.setAppointmentTime(appointmentTime);
 
-        bookingService.saveBooking(booking);
 
-        if(isFreeAppointmentTime(booking)){
-            return "redirect:/appointment/createAgain";
+
+        if (isFreeAppointmentTime(booking) &&
+                isDoctorBusy(currentDate, appointmentTime, AppointmentTimeEnum.fromDisplayName(currentTime))) {
+
+            bookingService.saveBooking(booking);
+            return "redirect:/appointment";
         }
-        return "redirect:/appointment";
+        appointmentService.deleteById(appointmentTime.getId());
+        return "redirect:/appointment/createAgain";
     }
 
     private boolean isFreeAppointmentTime(Booking booking) {
@@ -105,5 +118,9 @@ public class AppointmentPageController {
             return false;
         }
         return true;
+    }
+
+    private boolean isDoctorBusy(LocalDate localDate, AppointmentTime appointmentTime, AppointmentTimeEnum appointmentTimeEnum) {
+        return bookingService.existsByLocalDateAndAppointmentTimeAndTimeEnum(localDate, appointmentTime, appointmentTimeEnum);
     }
 }

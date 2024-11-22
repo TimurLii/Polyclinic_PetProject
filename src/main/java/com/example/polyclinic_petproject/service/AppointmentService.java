@@ -26,5 +26,7 @@ public class AppointmentService {
     }
 
 
-
+    public List<AppointmentTime> findAllAppointmentsByDoctorId(Long doctorId) {
+        return appointmentRepository.findAllAppointmentsByDoctor_Id(doctorId);
+    }
 }

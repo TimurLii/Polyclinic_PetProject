@@ -26,6 +26,7 @@ public class PolyclinicPetProjectApplication {
         AppointmentRepository appointmentTimeRepository = context.getBean(AppointmentRepository.class);
         BookingRepository bookingRepository = context.getBean(BookingRepository.class);
 
+        AppointmentTime appointmentTime = null;
         Patient patient;
         patient = new Patient();
         patient.setFullName("Patient1");
@@ -41,7 +42,7 @@ public class PolyclinicPetProjectApplication {
             doctor.setSpecialty("Specialty" + i);
             doctorRepository.save(doctor);
 
-            AppointmentTime appointmentTime = new AppointmentTime();
+             appointmentTime = new AppointmentTime();
             appointmentTime.setDoctor(doctor);
             appointmentTime.setPatient(patient);
             appointmentTimeRepository.save(appointmentTime);
@@ -55,8 +56,6 @@ public class PolyclinicPetProjectApplication {
 
 
         }
-
-
 
     }
 

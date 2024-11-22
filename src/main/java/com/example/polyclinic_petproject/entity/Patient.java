@@ -15,10 +15,14 @@ public class Patient implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullName;
+
     private int age;
+
     private String gender;
+
     private String contactDetails;
     private String login;
+
     private String password;
 
 

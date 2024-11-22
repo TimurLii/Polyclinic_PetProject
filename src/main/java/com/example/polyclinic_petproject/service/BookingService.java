@@ -1,5 +1,6 @@
 package com.example.polyclinic_petproject.service;
 
+import com.example.polyclinic_petproject.entity.AppointmentTime;
 import com.example.polyclinic_petproject.entity.Booking;
 import com.example.polyclinic_petproject.enums.AppointmentTimeEnum;
 import com.example.polyclinic_petproject.repository.BookingRepository;
@@ -39,4 +40,9 @@ public class BookingService {
     public boolean existsByDateAndTime(LocalDate localDate, AppointmentTimeEnum appointmentTimeEnum) {
         return bookingRepository.existsByLocalDateAndTimeEnum(localDate, appointmentTimeEnum);
     }
+
+    public boolean existsByLocalDateAndAppointmentTimeAndTimeEnum(LocalDate localDate, AppointmentTime appointmentTime, AppointmentTimeEnum appointmentTimeEnum) {
+        return bookingRepository.existsByLocalDateAndAppointmentTimeAndTimeEnum(localDate,appointmentTime,appointmentTimeEnum);
+    }
+
 }
