@@ -1,9 +1,7 @@
 package com.example.polyclinic_petproject.config;
 
 import com.example.polyclinic_petproject.enums.Role;
-import com.example.polyclinic_petproject.service.DoctorDetailService;
-import com.example.polyclinic_petproject.service.PatientDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.polyclinic_petproject.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,17 +13,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-    @Autowired
-    private final DoctorDetailService doctorDetailService;
+    private final CustomUserDetailsService customUserDetailsService;
 
-    @Autowired
-    private final PatientDetailsService patientDetailsService;
-    public WebSecurityConfig(DoctorDetailService doctorDetailService, PatientDetailsService patientDetailsService) {
-        this.doctorDetailService = doctorDetailService;
-        this.patientDetailsService = patientDetailsService;
+    public WebSecurityConfig(CustomUserDetailsService customUserDetailsService) {
+        this.customUserDetailsService = customUserDetailsService;
     }
 
-    @Autowired
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -39,8 +32,7 @@ public class WebSecurityConfig {
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll())
-                .userDetailsService(doctorDetailService)
-                .userDetailsService(patientDetailsService)
+                .userDetailsService(customUserDetailsService)
                 .build();
 
     }

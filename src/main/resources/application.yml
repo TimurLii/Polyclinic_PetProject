@@ -10,8 +10,8 @@ spring:
     console:
       enabled: true
   jpa:
-    show-sql: false
+    show-sql: true
     generate-ddl: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       open-in-view: false
