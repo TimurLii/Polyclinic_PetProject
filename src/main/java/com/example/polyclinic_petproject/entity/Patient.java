@@ -1,11 +1,13 @@
 package com.example.polyclinic_petproject.entity;
 
+import com.example.polyclinic_petproject.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Data
@@ -25,10 +27,20 @@ public class Patient implements UserDetails {
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Collection<Role> roles = Collections.singletonList(Role.USER);
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles.stream()
+                .map(role -> (GrantedAuthority) () -> role.name())
+                .toList();
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
@@ -56,21 +68,5 @@ public class Patient implements UserDetails {
         return true;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Patient{" +
-//                "fullName='" + fullName + '\'' +
-//                ", age=" + age +
-//                ", gender='" + gender + '\'' +
-//                ", contactDetails='" + contactDetails + '\'' +
-//                '}';
-//    }
-@Override
-public String toString() {
-    return "Patient{" +
-            "id=" + id +
-            ", name='" + fullName + '\'' +
-            '}';
-}
 }
 

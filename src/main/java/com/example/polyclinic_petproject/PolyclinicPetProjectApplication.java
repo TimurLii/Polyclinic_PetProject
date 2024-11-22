@@ -40,9 +40,11 @@ public class PolyclinicPetProjectApplication {
             Doctor doctor = new Doctor();
             doctor.setFullName("Doctor:" + i);
             doctor.setSpecialty("Specialty" + i);
+            doctor.setLogin("doc");
+            doctor.setPassword("$2a$12$0MOXAH6SWIldo9J2yJBvm.aSSLBI2ffH/eOe.W8zUZiRINFoJwMbe");
             doctorRepository.save(doctor);
 
-             appointmentTime = new AppointmentTime();
+            appointmentTime = new AppointmentTime();
             appointmentTime.setDoctor(doctor);
             appointmentTime.setPatient(patient);
             appointmentTimeRepository.save(appointmentTime);
@@ -56,6 +58,12 @@ public class PolyclinicPetProjectApplication {
 
 
         }
+        Doctor doctor = new Doctor();
+        doctor.setFullName("Doctor:" );
+        doctor.setSpecialty("Specialty" );
+        doctor.setLogin("doc");
+        doctor.setPassword("$2a$12$8dHHhksStUSNKFZ3zhs2guyh7w9baVHPMLL84TSvmcx5X8jGx8Sae");
+        doctorRepository.save(doctor);
 
     }
 
