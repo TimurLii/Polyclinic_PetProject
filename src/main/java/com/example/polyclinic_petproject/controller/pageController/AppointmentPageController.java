@@ -40,15 +40,10 @@ public class AppointmentPageController {
     public String getAllAppointments(Model model
             , @AuthenticationPrincipal PatientUserDetails patientUserDetails
             , @AuthenticationPrincipal DoctorUserDetails doctorUserDetails) {
-        System.out.println(patientUserDetails == null);
-        System.out.println(doctorUserDetails == null);
-        List<AppointmentTime> appointments =null;
-        if (patientUserDetails == null) {
-            appointments = appointmentService.findAllAppointmentsByDoctorId(doctorUserDetails.getId());
-        }
-        else{
-            appointments = appointmentService.findAllAppointmentsByPatientId(patientUserDetails.getId());
-        }
+
+        List<AppointmentTime> appointments = null;
+
+        appointments = getAppointmentTimes(patientUserDetails, doctorUserDetails);
 
 
         model.addAttribute("appointments", appointments);
@@ -135,5 +130,15 @@ public class AppointmentPageController {
 
     private boolean isDoctorBusy(LocalDate localDate, AppointmentTime appointmentTime, AppointmentTimeEnum appointmentTimeEnum) {
         return bookingService.existsByLocalDateAndAppointmentTimeAndTimeEnum(localDate, appointmentTime, appointmentTimeEnum);
+    }
+
+    private List<AppointmentTime> getAppointmentTimes(PatientUserDetails patientUserDetails, DoctorUserDetails doctorUserDetails) {
+        List<AppointmentTime> appointments;
+        if (patientUserDetails == null) {
+            appointments = appointmentService.findAllAppointmentsByDoctorId(doctorUserDetails.getId());
+        } else {
+            appointments = appointmentService.findAllAppointmentsByPatientId(patientUserDetails.getId());
+        }
+        return appointments;
     }
 }

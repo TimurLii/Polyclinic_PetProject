@@ -5,4 +5,4 @@ insert into appointment_time (doctor_id, patient_id, id) values
                                                              (3, 1, default),
                                                              (1, 3, default),
                                                              (2, 2, default),
-                                                             (3, 1, default);
+                                                             (3, 4, default);
