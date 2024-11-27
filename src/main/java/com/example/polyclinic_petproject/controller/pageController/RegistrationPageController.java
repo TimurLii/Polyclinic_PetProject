@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping({"/registration"})
+
 public class RegistrationPageController {
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -23,14 +24,18 @@ public class RegistrationPageController {
     @GetMapping()
     public String showRegistrationPage(Model model) { // Добавьте параметр Model
         model.addAttribute("patient", new Patient()); // Добавьте новый объект Patient в модель
-        return "registrationFormPage"; // Возврат шаблона
+        return "registrationFormPage"; // Возврат шаблона}
     }
+
 
     @PostMapping()
-    public String registerPatient(@ModelAttribute Patient patient){
-            patient.setPassword(passwordEncoder.encode(patient.getPassword())); // Шифрование пароля
-            patientService.savePatient(patient);
-            return "redirect:/patient";
+    public String registerPatient(@ModelAttribute Patient patient) {
+        patient.setPassword(passwordEncoder.encode(patient.getPassword())); // Шифрование пароля
+
+        patient.setPassword(passwordEncoder.encode(patient.getPassword()));
+        patientService.savePatient(patient);
+        return "redirect:/patient";
 
     }
+
 }

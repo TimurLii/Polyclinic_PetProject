@@ -25,8 +25,8 @@ public class AppointmentService {
         appointmentRepository.deleteById(id);
     }
 
-
-    public List<AppointmentTime> findAllAppointmentsByDoctorId(Long doctorId) {
-        return appointmentRepository.findAllAppointmentsByDoctor_Id(doctorId);
+    public List<AppointmentTime> findAllAppointmentsByPatientId(Long userId) {
+        return appointmentRepository.findByPatientId(userId);
     }
+
 }

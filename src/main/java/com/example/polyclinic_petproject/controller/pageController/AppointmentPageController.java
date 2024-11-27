@@ -35,8 +35,11 @@ public class AppointmentPageController {
     }
 
     @GetMapping()
-    public String getAllAppointments(Model model) {
-        List<AppointmentTime> appointments = appointmentService.getAllAppointments();
+
+    public String getAllAppointments(Model model
+    , @AuthenticationPrincipal PatientUserDetails userDetails) {
+        List<AppointmentTime> appointments = appointmentService.findAllAppointmentsByPatientId(userDetails.getId());
+
         model.addAttribute("appointments", appointments);
 
         List<Booking> allBookings = bookingService.getAllBookings();
@@ -74,44 +77,6 @@ public class AppointmentPageController {
         return "createAppointmentPageAgain";
     }
 
-    //    @PostMapping()
-//    public String createAppointment(@ModelAttribute AppointmentTime appointmentTime,
-//                                    @RequestParam("selectedDoctorId") Long selectedDoctorId,
-//                                    @RequestParam("selectedTimeEnum") String selectedTimeEnum,
-//                                    @RequestParam("dataSelected") LocalDate dataSelected,
-//                                    @AuthenticationPrincipal UserDetails userDetails) {
-//
-//        LocalDate currentDate = dataSelected;
-//        String currentTime = selectedTimeEnum;
-//
-//        Patient patient = patientService.findByFullName(userDetails.getUsername());
-//        if (patient.isEnabled()) {
-//            appointmentTime.setPatient(patient);
-//        }
-//
-//        Doctor doctor = doctorService.findById(selectedDoctorId)
-//                .orElseThrow(() -> new RuntimeException("Doctor not found"));
-//        appointmentTime.setDoctor(doctor);
-//
-//
-//        appointmentService.saveAppointment(appointmentTime);
-//
-//        Booking booking = new Booking();
-//        booking.setLocalDate(currentDate);
-//        booking.setTimeEnum(AppointmentTimeEnum.fromDisplayName(currentTime));
-//        booking.setAppointmentTime(appointmentTime);
-//
-//
-//
-//        if (isFreeAppointmentTime(booking) &&
-//                isDoctorBusy(currentDate, appointmentTime, AppointmentTimeEnum.fromDisplayName(currentTime))) {
-//
-//            bookingService.saveBooking(booking);
-//            return "redirect:/appointment";
-//        }
-//        appointmentService.deleteById(appointmentTime.getId());
-//        return "redirect:/appointment/createAgain";
-//    }
     @PostMapping()
     public String createAppointment(@ModelAttribute AppointmentTime appointmentTime,
                                     @RequestParam("selectedDoctorId") Long selectedDoctorId,

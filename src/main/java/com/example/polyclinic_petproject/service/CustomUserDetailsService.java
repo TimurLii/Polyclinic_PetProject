@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         try {
             user = doctorDetailService.loadUserByUsername(username);
         } catch (UsernameNotFoundException e) {
-            // Игнорируем исключение, продолжаем выполнение
+
         }
 
         if (user == null) {
