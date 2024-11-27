@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    <div>Welcome <span sec:authentication="name"></span></div>
+</div>
+<div>
+    <form method="post" th:action="@{/logout}">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+<div>
+    <div>
+        <a th:href="@{/appointment/create}">Create New Appointment</a>
+    </div>
+    <div>
+        <a th:href="@{/appointment}">Your appointments</a>
+    </div>
+</div>
+
+
+</body>
+</html>

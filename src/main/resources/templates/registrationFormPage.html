@@ -1,0 +1,33 @@
+<form action="#" th:action="@{/}" th:object="${patient}" method="post">
+    <div class="form-group">
+        <label for="fullName">Полное имя пациента:</label>
+        <input type="text" id="fullName" th:field="*{fullName}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="age">Возраст пациента:</label>
+        <input type="number" id="age" th:field="*{age}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="gender">Пол пациента:</label>
+        <input type="text" id="gender" th:field="*{gender}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="contactDetails">Контактные данные:</label>
+        <input type="text" id="contactDetails" th:field="*{contactDetails}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="login">Логин:</label>
+        <input type="text" id="login" th:field="*{login}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" th:field="*{password}" required>
+    </div>
+
+    <button type="submit">Зарегистрироваться</button>
+</form>

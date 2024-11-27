@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Make an appointment</title>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    <div>Welcome <span sec:authentication="name"></span></div>
+</div>
+<div>
+    <form method="post" th:action="@{/logout}">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+
+<div>
+    <h1>Select doctor</h1>
+    <form action="#" method="post" th:action="@{/appointment}" th:object="${appointmentTime}">
+        <label for="doctorSelect">Choose a doctor:</label>
+        <select id="doctorSelect" name="selectedDoctorId">
+            <option value="">Select a doctor</option>
+            <tr th:each="doctor : ${allDoctors}">
+                <option th:text="${doctor.fullName}" th:value="${doctor.id}"></option>
+            </tr>
+        </select>
+
+        <h1>Data choice</h1>
+        <label for="dataSelected">Choose a date:</label>
+        <input type="date" id="dataSelected" name="dataSelected">
+
+        <h1>Timing choice</h1>
+        <label for="timeSelect">Choose a time:</label>
+        <select id="timeSelect" name="selectedTimeEnum">
+            <option value="">Select a time</option>
+            <tr th:each="time : ${appointmentTimeEnum}">
+                <option th:text="${time.displayName}" th:value="${time.displayName}"></option>
+            </tr>
+        </select>
+
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

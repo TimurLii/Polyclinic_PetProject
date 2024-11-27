@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Polyclinic_PetProject
+  datasource:
+    url: jdbc:h2:mem:PolyclinicDB
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: update
+      open-in-view: false

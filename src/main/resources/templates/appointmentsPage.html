@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>All appointments</title>
+</head>
+<body>
+<div>
+    <form method="post" th:action="@{/logout}">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+<h1>All appointments</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Patient</th>
+        <th>Doctor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="appointment : ${appointments}">
+        <td><span th:text="${appointment.id}"></span></td>
+        <td>
+            <span th:each="booking : ${appointment.bookings}" th:text="${booking.localDate}"></span>
+        </td>
+        <td>
+            <span th:each="booking : ${appointment.bookings}" th:text="${booking.timeEnum.getDisplayName()}"></span>
+        </td>
+        <td><span th:text="${appointment.patient.fullName}"></span></td>
+        <td><span th:text="${appointment.doctor.fullName}"></span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
