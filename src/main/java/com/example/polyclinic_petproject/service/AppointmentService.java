@@ -29,4 +29,7 @@ public class AppointmentService {
         return appointmentRepository.findByPatientId(userId);
     }
 
+    public List<AppointmentTime> findAllAppointmentsByDoctorId(Long id) {
+        return  appointmentRepository.findByDoctorId(id);
+    }
 }

@@ -16,7 +16,7 @@ public class PatientUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return patient.getRoles().stream()
-                .map(role -> (GrantedAuthority) () -> role.name())
+                .map(role -> (GrantedAuthority) role::name)
                 .toList();
     }
 

@@ -5,6 +5,7 @@ import com.example.polyclinic_petproject.entity.Booking;
 import com.example.polyclinic_petproject.entity.Doctor;
 import com.example.polyclinic_petproject.entity.Patient;
 import com.example.polyclinic_petproject.enums.AppointmentTimeEnum;
+import com.example.polyclinic_petproject.impl.DoctorUserDetails;
 import com.example.polyclinic_petproject.impl.PatientUserDetails;
 import com.example.polyclinic_petproject.service.AppointmentService;
 import com.example.polyclinic_petproject.service.BookingService;
@@ -37,8 +38,18 @@ public class AppointmentPageController {
     @GetMapping()
 
     public String getAllAppointments(Model model
-    , @AuthenticationPrincipal PatientUserDetails userDetails) {
-        List<AppointmentTime> appointments = appointmentService.findAllAppointmentsByPatientId(userDetails.getId());
+            , @AuthenticationPrincipal PatientUserDetails patientUserDetails
+            , @AuthenticationPrincipal DoctorUserDetails doctorUserDetails) {
+        System.out.println(patientUserDetails == null);
+        System.out.println(doctorUserDetails == null);
+        List<AppointmentTime> appointments =null;
+        if (patientUserDetails == null) {
+            appointments = appointmentService.findAllAppointmentsByDoctorId(doctorUserDetails.getId());
+        }
+        else{
+            appointments = appointmentService.findAllAppointmentsByPatientId(patientUserDetails.getId());
+        }
+
 
         model.addAttribute("appointments", appointments);
 

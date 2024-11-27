@@ -24,6 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserDetails user = null;
         try {
             user = doctorDetailService.loadUserByUsername(username);
+            System.out.println(user);
         } catch (UsernameNotFoundException e) {
 
         }
@@ -31,7 +32,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user == null) {
             user = patientDetailsService.loadUserByUsername(username);
             System.out.println(user);
-            //FIXME добавить user.isEnabled(true)
         }
         return user;
     }
