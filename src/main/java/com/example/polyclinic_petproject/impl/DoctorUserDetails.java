@@ -17,7 +17,7 @@ public class DoctorUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return doctor.getRoles().stream()
-                .map(role -> (GrantedAuthority) () -> role.name())
+                .map(role -> (GrantedAuthority) role::name)
                 .toList();
     }
 

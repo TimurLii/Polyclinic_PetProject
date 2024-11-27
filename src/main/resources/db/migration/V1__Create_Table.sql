@@ -33,5 +33,5 @@ create table doctor_roles
 create table patient_roles
 (
     patient_id bigint not null,
-    roles      enum ('ADMIN','USER')
+    roles      enum ('USER')
 );

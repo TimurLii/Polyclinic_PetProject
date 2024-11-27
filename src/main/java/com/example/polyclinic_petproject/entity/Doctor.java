@@ -4,6 +4,7 @@ import com.example.polyclinic_petproject.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -25,7 +26,8 @@ public class Doctor {
 
     private String password;
 
-    @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
-    private Collection<Role> roles = Collections.singletonList(Role.ADMIN);
+    @CollectionTable(name = "doctor_roles", joinColumns = @JoinColumn(name = "doctor_id"))
+    @Enumerated(EnumType.STRING)
+    private Collection<Role> roles = new ArrayList<>(Collections.singletonList(Role.ADMIN));
 }

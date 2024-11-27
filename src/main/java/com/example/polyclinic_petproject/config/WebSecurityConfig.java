@@ -28,7 +28,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
 
                         .requestMatchers("/registration", "/login").permitAll()
-                        .requestMatchers("/appointments", "/bookings", "/doctors", "/patients").hasAuthority(Role.ADMIN.name())
+                        .requestMatchers("/appointments", "/bookings", "/doctors", "/patients")
+                        .hasAuthority(Role.ADMIN.name())
                         .anyRequest().authenticated()
                 )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll

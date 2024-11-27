@@ -1,5 +1,25 @@
-1. Команда для поднятия контейнера PostgresSQL
-   docker run --name postgres-container -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=pass -e POSTGRES_DB=PolyclinicDB -p 5432:5432 -d postgres:latest
-2. Команда для проверки, что Контейнер запустился docker ps 
-3. После авторизации сделать переброс на страницу пользователя и запретить ему видеть других пользователй 
-4. Добавить роли
+# Polyclinic Management System
+
+## Описание
+Система для управления данными поликлиники: пациенты, врачи, расписание.
+
+## Требования
+- Java 17
+- Maven 3.6+
+- PostgreSQL 13+
+
+## Установка
+1. Клонируйте репозиторий.
+2. Настройте базу данных (переменные среды указаны в application.properties).
+3. Выполните `mvn spring-boot:run`.
+
+## Примеры API
+### Получение данных врача
+**GET /api/doctors/{id}**
+
+Ответ:
+```json
+{
+  "id": 1,
+  "name": "John Doe"
+}
