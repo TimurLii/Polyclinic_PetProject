@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-@Data
+
 public class DoctorUserDetails implements UserDetails {
     private final Doctor doctor;
 
@@ -29,5 +29,8 @@ public class DoctorUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return doctor.getLogin();
+    }
+    public Long getId() {
+        return doctor.getId();
     }
 }

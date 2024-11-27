@@ -23,7 +23,7 @@ public class PatientDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User  not found"));
 
         Collection<? extends GrantedAuthority> authorities = patient.getRoles().stream()
-                .map(role -> (GrantedAuthority) () -> role.name())
+                .map(role -> (GrantedAuthority) role::name)
                 .toList();
 
         return new PatientUserDetails(patient);
