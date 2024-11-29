@@ -23,29 +23,24 @@ public class WebSecurityConfig {
     }
 
 
-    //    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http
-//                .authorizeHttpRequests((requests) -> requests
-//
-//                        .requestMatchers("/registration", "/login").permitAll()
-//                        .requestMatchers("/appointments/**", "/bookings/**", "/doctors/**", "/patients/**")
-//                        .hasAuthority(Role.ADMIN.name())
-//                        .anyRequest().authenticated()
-//                )
-//                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll
-//                )
-//                .logout(LogoutConfigurer::permitAll)
-//                .userDetailsService(customUserDetailsService)
-//                .build();
-//
-//    }
-    @Bean
-    SecurityFilterChain noSecurity(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(it->it.anyRequest().permitAll())
+        @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .authorizeHttpRequests((requests) -> requests
+
+                        .requestMatchers("/registration", "/login").permitAll()
+                        .requestMatchers("/appointments/**", "/bookings/**", "/doctors/**", "/patients/**")
+                        .hasAuthority(Role.ADMIN.name())
+                        .anyRequest().authenticated()
+                )
+                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll
+                )
+                .logout(LogoutConfigurer::permitAll)
+                .userDetailsService(customUserDetailsService)
                 .build();
+
     }
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();

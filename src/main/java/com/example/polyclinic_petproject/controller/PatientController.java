@@ -1,6 +1,7 @@
 package com.example.polyclinic_petproject.controller;
 
 import com.example.polyclinic_petproject.entity.Patient;
+import com.example.polyclinic_petproject.repository.AppointmentRepository;
 import com.example.polyclinic_petproject.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/patients")
 public class PatientController {
+
     @Autowired
     private PatientService patientService;
 

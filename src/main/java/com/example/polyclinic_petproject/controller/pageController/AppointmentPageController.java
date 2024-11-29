@@ -36,13 +36,12 @@ public class AppointmentPageController {
     }
 
     @GetMapping()
-
     public String getAllAppointments(Model model
             , @AuthenticationPrincipal PatientUserDetails patientUserDetails
             , @AuthenticationPrincipal DoctorUserDetails doctorUserDetails) {
 
         List<AppointmentTime> appointments = null;
-
+        // возвращается список всех записей для авторизованного пользователя
         appointments = getAppointmentTimes(patientUserDetails, doctorUserDetails);
 
 
@@ -56,7 +55,7 @@ public class AppointmentPageController {
         return "appointmentsPage";
     }
 
-
+    // создание страницы, на которую передаётся ENUM со временем, и список всех врачей
     @GetMapping("/create")
     public String createAppointmentTime(Model model) {
 
@@ -83,6 +82,16 @@ public class AppointmentPageController {
         return "createAppointmentPageAgain";
     }
 
+    /***
+     * Метод отвечающие за создание новой записи и сохранении ее в базе
+     * @param appointmentTime новая запись
+     * @param selectedDoctorId врач, которого выбрал пользователь на странице http://localhost:8080/appointment/create
+     * @param selectedTimeEnum время выбранное пользователем
+     * @param dataSelected дата выбранная пользователем
+     * @param userDetails авторизованный пользователь
+     * @return если врач, время и дата свободны происходит редирект на страницу со всеми записями пользователя
+     * если что-либо занято происходит редирект на страницу создания новой записи
+     */
     @PostMapping()
     public String createAppointment(@ModelAttribute AppointmentTime appointmentTime,
                                     @RequestParam("selectedDoctorId") Long selectedDoctorId,
@@ -107,13 +116,12 @@ public class AppointmentPageController {
 
         appointmentService.saveAppointment(appointmentTime);
 
-        Booking booking = new Booking();
-        booking.setLocalDate(currentDate);
-        booking.setTimeEnum(AppointmentTimeEnum.fromDisplayName(currentTime));
-        booking.setAppointmentTime(appointmentTime);
+        // Метод отвечающий за создание нового бронирования
+        Booking booking = createBooking(appointmentTime, selectedTimeEnum, dataSelected);
 
+        // Метод проверяющий свободно ли выбранные дата, время и доктор
         if (!isFreeAppointmentTime(booking) &&
-                !isDoctorBusy(currentDate, appointmentTime, AppointmentTimeEnum.fromDisplayName(currentTime))) {
+                !isDoctorBusy(dataSelected, appointmentTime, AppointmentTimeEnum.fromDisplayName(selectedTimeEnum))) {
 
             bookingService.saveBooking(booking);
             return "redirect:/appointment";
@@ -122,16 +130,27 @@ public class AppointmentPageController {
         appointmentService.deleteById(appointmentTime.getId());
         return "redirect:/appointment/createAgain";
     }
-    @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id){
-        bookingService.deleteById(id);
+
+    // Метод отвечающий за создание нового бронирования
+    private Booking createBooking(AppointmentTime appointmentTime, String selectedTimeEnum, LocalDate dataSelected) {
+        Booking booking = new Booking();
+        booking.setLocalDate(dataSelected);
+        booking.setTimeEnum(AppointmentTimeEnum.fromDisplayName(selectedTimeEnum));
+        booking.setAppointmentTime(appointmentTime);
+        booking.setStatus(Booking.BookingStatus.BUSY);
+        return booking;
     }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable Long id) {
+        bookingService.deleteById(id);
+    }
+//     Проверка есть ли данные время и дата в таблице, если таких записей нет возвращает
     private boolean isFreeAppointmentTime(Booking booking) {
         return bookingService.existsByDateAndTime(booking.getLocalDate(), booking.getTimeEnum());
 
     }
-
+    //Проверка занят ли доктор в это время и дату
     private boolean isDoctorBusy(LocalDate localDate, AppointmentTime appointmentTime, AppointmentTimeEnum appointmentTimeEnum) {
         return bookingService.existsByLocalDateAndAppointmentTimeAndTimeEnum(localDate, appointmentTime, appointmentTimeEnum);
     }

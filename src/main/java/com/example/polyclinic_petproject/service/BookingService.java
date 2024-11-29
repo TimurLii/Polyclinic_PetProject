@@ -37,12 +37,15 @@ public class BookingService {
         return bookingRepository.findBookingsByStatus(bookingStatus);
     }
 
+    // Возвращает false если выбранные дата и время существуют, и true если не существуют
     public boolean existsByDateAndTime(LocalDate localDate, AppointmentTimeEnum appointmentTimeEnum) {
+        System.out.println("existsByDateAndTime = " + bookingRepository.existsByLocalDateAndTimeEnum(localDate, appointmentTimeEnum));
         return bookingRepository.existsByLocalDateAndTimeEnum(localDate, appointmentTimeEnum);
     }
 
     public boolean existsByLocalDateAndAppointmentTimeAndTimeEnum(LocalDate localDate, AppointmentTime appointmentTime, AppointmentTimeEnum appointmentTimeEnum) {
-        return bookingRepository.existsByLocalDateAndAppointmentTimeAndTimeEnum(localDate,appointmentTime,appointmentTimeEnum);
+        System.out.println("existsByLocalDateAndAppointmentTimeAndTimeEnum = " + bookingRepository.existsByLocalDateAndAppointmentTimeAndTimeEnum(localDate, appointmentTime, appointmentTimeEnum));
+        return bookingRepository.existsByLocalDateAndAppointmentTimeAndTimeEnum(localDate, appointmentTime, appointmentTimeEnum);
     }
 
 }

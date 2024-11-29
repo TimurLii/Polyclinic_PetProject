@@ -14,7 +14,7 @@ public interface AppointmentRepository extends JpaRepository<AppointmentTime, Lo
 
     List<AppointmentTime> findByDoctorId(Long id);
 
-
+    void deleteByPatientId(Long id);
     void deleteByDoctorId(Long id);
 }
 
