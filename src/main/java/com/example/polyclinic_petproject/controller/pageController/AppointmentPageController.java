@@ -122,6 +122,10 @@ public class AppointmentPageController {
         appointmentService.deleteById(appointmentTime.getId());
         return "redirect:/appointment/createAgain";
     }
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable Long id){
+        bookingService.deleteById(id);
+    }
 
     private boolean isFreeAppointmentTime(Booking booking) {
         return bookingService.existsByDateAndTime(booking.getLocalDate(), booking.getTimeEnum());

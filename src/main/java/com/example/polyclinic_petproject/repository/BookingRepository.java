@@ -18,5 +18,5 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     boolean existsByLocalDateAndAppointmentTimeAndTimeEnum(LocalDate date, AppointmentTime appointmentTime, AppointmentTimeEnum appointmentTimeEnum);
 
-
+    void deleteByAppointmentTimeId(Long id);
 }

@@ -20,15 +20,16 @@ public class AppointmentTime {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @OneToMany(mappedBy = "appointmentTime")
+    @OneToMany(mappedBy = "appointmentTime", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookings;
 
     @Override
     public String toString() {
         return "AppointmentTime{" +
                 "id=" + id +
-                "patient= " +patient.getFullName()+
-                "doctor=" + doctor.getFullName()+
+                "patient= " + patient.getFullName() +
+                "doctor=" + doctor.getFullName() +
                 '}';
     }
 }
+

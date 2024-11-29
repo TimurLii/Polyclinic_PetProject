@@ -40,7 +40,6 @@ public class WebSecurityConfig {
 //                .build();
 //
 //    }
-
     @Bean
     SecurityFilterChain noSecurity(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(AbstractHttpConfigurer::disable)

@@ -31,7 +31,7 @@ public class PatientController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         patientService.deleteById(id);
         return ResponseEntity.noContent().build();

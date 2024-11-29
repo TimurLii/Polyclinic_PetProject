@@ -23,7 +23,7 @@ public class AppointmentController {
     public List<AppointmentTime> getAllAppointments() {
         return appointmentService.getAllAppointments();
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         appointmentService.deleteById(id);
         return ResponseEntity.noContent().build();
