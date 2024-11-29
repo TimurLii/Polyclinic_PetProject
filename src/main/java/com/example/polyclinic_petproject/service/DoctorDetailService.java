@@ -26,7 +26,7 @@ public class DoctorDetailService implements UserDetailsService {
         Collection<? extends GrantedAuthority> authorities = doctor.getRoles().stream()
                 .map(role -> (GrantedAuthority) () -> role.name())
                 .toList();
-
+        System.out.println();
         return new DoctorUserDetails(doctor);
     }
 

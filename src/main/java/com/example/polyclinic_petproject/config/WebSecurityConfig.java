@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -22,24 +23,30 @@ public class WebSecurityConfig {
     }
 
 
+    //    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http
+//                .authorizeHttpRequests((requests) -> requests
+//
+//                        .requestMatchers("/registration", "/login").permitAll()
+//                        .requestMatchers("/appointments/**", "/bookings/**", "/doctors/**", "/patients/**")
+//                        .hasAuthority(Role.ADMIN.name())
+//                        .anyRequest().authenticated()
+//                )
+//                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll
+//                )
+//                .logout(LogoutConfigurer::permitAll)
+//                .userDetailsService(customUserDetailsService)
+//                .build();
+//
+//    }
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests((requests) -> requests
-
-                        .requestMatchers("/registration", "/login").permitAll()
-                        .requestMatchers("/appointments", "/bookings", "/doctors", "/patients")
-                        .hasAuthority(Role.ADMIN.name())
-                        .anyRequest().authenticated()
-                )
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll
-                )
-                .logout(LogoutConfigurer::permitAll)
-                .userDetailsService(customUserDetailsService)
+    SecurityFilterChain noSecurity(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(it->it.anyRequest().permitAll())
                 .build();
-
     }
-
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();

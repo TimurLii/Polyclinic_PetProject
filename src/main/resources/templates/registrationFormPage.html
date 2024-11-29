@@ -1,4 +1,4 @@
-<form action="#" th:action="@{/}" th:object="${patient}" method="post">
+<form action="#" th:action="@{/registration}" th:object="${patient}" method="post">
     <div class="form-group">
         <label for="fullName">Полное имя пациента:</label>
         <input type="text" id="fullName" th:field="*{fullName}" required>
