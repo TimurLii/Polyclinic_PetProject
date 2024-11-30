@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class RegistrationPageController {
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private  PasswordEncoder passwordEncoder;
     @Autowired
-    private PatientService patientService;
+    private  PatientService patientService;
 
     @GetMapping()
     public String showRegistrationPage(Model model) {

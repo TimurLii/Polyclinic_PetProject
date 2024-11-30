@@ -12,10 +12,13 @@ import java.util.Optional;
 
 @Service
 public class PatientService {
-    @Autowired
-    AppointmentRepository appointmentRepository;
-    @Autowired
-    private PatientRepository patientRepository;
+    private final AppointmentRepository appointmentRepository;
+    private final PatientRepository patientRepository;
+
+    public PatientService(AppointmentRepository appointmentRepository, PatientRepository patientRepository) {
+        this.appointmentRepository = appointmentRepository;
+        this.patientRepository = patientRepository;
+    }
 
     public List<Patient> getAllPatients() {
         return patientRepository.findAll();

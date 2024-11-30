@@ -12,8 +12,11 @@ import java.util.List;
 
 @Service
 public class BookingService {
-    @Autowired
-    private BookingRepository bookingRepository;
+    private final BookingRepository bookingRepository;
+
+    public BookingService(BookingRepository bookingRepository) {
+        this.bookingRepository = bookingRepository;
+    }
 
     public Booking saveBooking(Booking booking) {
         return bookingRepository.save(booking);
@@ -29,22 +32,19 @@ public class BookingService {
     }
 
     public List<Booking> getBookingByStatus(Booking.BookingStatus bookingStatus) {
-        List<Booking> allBookingBusy = bookingRepository.findBookingsByStatus(bookingStatus);
-        return allBookingBusy;
+        return bookingRepository.findBookingsByStatus(bookingStatus);
     }
 
     public List<Booking> getBookingsByStatusBusy(Booking.BookingStatus bookingStatus) {
         return bookingRepository.findBookingsByStatus(bookingStatus);
     }
 
-    // Возвращает false если выбранные дата и время существуют, и true если не существуют
+    // Возвращает true если выбранные дата и время существуют, и false если не существуют
     public boolean existsByDateAndTime(LocalDate localDate, AppointmentTimeEnum appointmentTimeEnum) {
-        System.out.println("existsByDateAndTime = " + bookingRepository.existsByLocalDateAndTimeEnum(localDate, appointmentTimeEnum));
         return bookingRepository.existsByLocalDateAndTimeEnum(localDate, appointmentTimeEnum);
     }
 
     public boolean existsByLocalDateAndAppointmentTimeAndTimeEnum(LocalDate localDate, AppointmentTime appointmentTime, AppointmentTimeEnum appointmentTimeEnum) {
-        System.out.println("existsByLocalDateAndAppointmentTimeAndTimeEnum = " + bookingRepository.existsByLocalDateAndAppointmentTimeAndTimeEnum(localDate, appointmentTime, appointmentTimeEnum));
         return bookingRepository.existsByLocalDateAndAppointmentTimeAndTimeEnum(localDate, appointmentTime, appointmentTimeEnum);
     }
 

@@ -11,6 +11,8 @@ import com.example.polyclinic_petproject.service.AppointmentService;
 import com.example.polyclinic_petproject.service.BookingService;
 import com.example.polyclinic_petproject.service.DoctorService;
 import com.example.polyclinic_petproject.service.PatientService;
+import jakarta.transaction.Transactional;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,25 +37,41 @@ public class AppointmentPageController {
         this.bookingService = bookingService;
     }
 
-    @GetMapping()
-    public String getAllAppointments(Model model
-            , @AuthenticationPrincipal PatientUserDetails patientUserDetails
-            , @AuthenticationPrincipal DoctorUserDetails doctorUserDetails) {
+//    @GetMapping()
+//    @Transactional
+//    public String getAllAppointments(Model model
+//            , @AuthenticationPrincipal PatientUserDetails patientUserDetails
+//            , @AuthenticationPrincipal DoctorUserDetails doctorUserDetails) {
+//
+//        List<AppointmentTime> appointments = getAppointmentTimes(patientUserDetails, doctorUserDetails);
+//        // возвращается список всех записей для авторизованного пользователя
+//
+//
+//        model.addAttribute("appointments", appointments);
+//
+//        List<Booking> allBookings = bookingService.getAllBookings();
+//
+//
+//        model.addAttribute("bookings", allBookings);
+//
+//        return "appointmentsPage";
+//    }
+@GetMapping()
+@Transactional
+public String getAllAppointments(Model model,
+                                 @AuthenticationPrincipal PatientUserDetails patientUserDetails,
+                                 @AuthenticationPrincipal DoctorUserDetails doctorUserDetails) {
+    List<AppointmentTime> appointments = getAppointmentTimes(patientUserDetails, doctorUserDetails);
 
-        List<AppointmentTime> appointments = null;
-        // возвращается список всех записей для авторизованного пользователя
-        appointments = getAppointmentTimes(patientUserDetails, doctorUserDetails);
+    // Инициализируйте ленивые коллекции, если необходимо
+    appointments.forEach(appointment -> Hibernate.initialize(appointment.getBookings()));
 
+    model.addAttribute("appointments", appointments);
+    List<Booking> allBookings = bookingService.getAllBookings();
+    model.addAttribute("bookings", allBookings);
 
-        model.addAttribute("appointments", appointments);
-
-        List<Booking> allBookings = bookingService.getAllBookings();
-
-
-        model.addAttribute("bookings", allBookings);
-
-        return "appointmentsPage";
-    }
+    return "appointmentsPage";
+}
 
     // создание страницы, на которую передаётся ENUM со временем, и список всех врачей
     @GetMapping("/create")
@@ -93,6 +111,7 @@ public class AppointmentPageController {
      * если что-либо занято происходит редирект на страницу создания новой записи
      */
     @PostMapping()
+    @Transactional
     public String createAppointment(@ModelAttribute AppointmentTime appointmentTime,
                                     @RequestParam("selectedDoctorId") Long selectedDoctorId,
                                     @RequestParam("selectedTimeEnum") String selectedTimeEnum,
@@ -119,7 +138,7 @@ public class AppointmentPageController {
         // Метод отвечающий за создание нового бронирования
         Booking booking = createBooking(appointmentTime, selectedTimeEnum, dataSelected);
 
-        // Метод проверяющий свободно ли выбранные дата, время и доктор
+        // проверка свободно ли выбранные дата, время и доктор
         if (!isFreeAppointmentTime(booking) &&
                 !isDoctorBusy(dataSelected, appointmentTime, AppointmentTimeEnum.fromDisplayName(selectedTimeEnum))) {
 
@@ -145,11 +164,13 @@ public class AppointmentPageController {
     public void deleteById(@PathVariable Long id) {
         bookingService.deleteById(id);
     }
-//     Проверка есть ли данные время и дата в таблице, если таких записей нет возвращает
+
+    //     Проверка есть ли данные время и дата в таблице
     private boolean isFreeAppointmentTime(Booking booking) {
         return bookingService.existsByDateAndTime(booking.getLocalDate(), booking.getTimeEnum());
 
     }
+
     //Проверка занят ли доктор в это время и дату
     private boolean isDoctorBusy(LocalDate localDate, AppointmentTime appointmentTime, AppointmentTimeEnum appointmentTimeEnum) {
         return bookingService.existsByLocalDateAndAppointmentTimeAndTimeEnum(localDate, appointmentTime, appointmentTimeEnum);

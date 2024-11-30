@@ -79,4 +79,5 @@ create table doctors (
                          password varchar(255),
                          specialty varchar(255),
                          primary key (id)
+             //TODO asdadads a
 );

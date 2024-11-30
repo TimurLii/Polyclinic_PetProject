@@ -21,7 +21,7 @@ public class Booking {
     @Enumerated(EnumType.STRING)
     private AppointmentTimeEnum timeEnum;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "appointment_time_id")
     @JsonBackReference
     private AppointmentTime appointmentTime;

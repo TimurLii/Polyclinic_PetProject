@@ -20,7 +20,7 @@ public class AppointmentTime {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @OneToMany(mappedBy = "appointmentTime", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "appointmentTime", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
     @Override
