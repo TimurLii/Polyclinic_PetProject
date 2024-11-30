@@ -36,26 +36,6 @@ public class AppointmentPageController {
         this.appointmentService = appointmentService;
         this.bookingService = bookingService;
     }
-
-//    @GetMapping()
-//    @Transactional
-//    public String getAllAppointments(Model model
-//            , @AuthenticationPrincipal PatientUserDetails patientUserDetails
-//            , @AuthenticationPrincipal DoctorUserDetails doctorUserDetails) {
-//
-//        List<AppointmentTime> appointments = getAppointmentTimes(patientUserDetails, doctorUserDetails);
-//        // возвращается список всех записей для авторизованного пользователя
-//
-//
-//        model.addAttribute("appointments", appointments);
-//
-//        List<Booking> allBookings = bookingService.getAllBookings();
-//
-//
-//        model.addAttribute("bookings", allBookings);
-//
-//        return "appointmentsPage";
-//    }
 @GetMapping()
 @Transactional
 public String getAllAppointments(Model model,
@@ -63,7 +43,6 @@ public String getAllAppointments(Model model,
                                  @AuthenticationPrincipal DoctorUserDetails doctorUserDetails) {
     List<AppointmentTime> appointments = getAppointmentTimes(patientUserDetails, doctorUserDetails);
 
-    // Инициализируйте ленивые коллекции, если необходимо
     appointments.forEach(appointment -> Hibernate.initialize(appointment.getBookings()));
 
     model.addAttribute("appointments", appointments);
